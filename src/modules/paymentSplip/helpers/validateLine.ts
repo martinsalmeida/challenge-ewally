@@ -1,6 +1,6 @@
-import { AppError } from "../../../../utils/appError";
+import { AppError } from "../../../utils/appError";
 
-export const validateLineBank = (line: string) => {
+export const validateLine = (line: string) => {
   const ONLY_NUMBERS = /^\d+$/;
 
   const checkNumbersOnly = ONLY_NUMBERS.test(line);

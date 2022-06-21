@@ -3,16 +3,18 @@ import { getExpirationDateOthers } from "../../helpers/paymentSplipOthers/getExp
 import { getAmountBank } from "../../helpers/paymentSplipBank/getAmountBank";
 import { validateDigitsOthers } from "../../helpers/paymentSplipOthers/validateDigitsOthers";
 import { validateDigitsBank } from "../../helpers/paymentSplipBank/validateDigitsBank";
-import { validateLineBank } from "../../helpers/paymentSplipBank/validateLineBank";
+import { validateLine } from "../../helpers/validateLine";
 import { convertLineToBarCodeBank } from "../../helpers/paymentSplipBank/convertLineToBarCodeBank";
 import { convertLineToBarCodeOthers } from "../../helpers/paymentSplipOthers/convertLineToBarCodeOthers";
 import { getAmountOthers } from "../../helpers/paymentSplipOthers/getAmountOthers";
 
 export class ValidationPaymentSplipUseCase {
   execute(line: string) {
-    const lineLenght = validateLineBank(line);
+    const lineValidated = validateLine(line);
+    const LINE_LENGHT_BANK = 47;
+    const LINE_LENGHT_OTHERS = 48;
 
-    if (lineLenght === 47) {
+    if (lineValidated === LINE_LENGHT_BANK) {
       validateDigitsBank(line);
 
       const barCode = convertLineToBarCodeBank(line);
@@ -22,7 +24,7 @@ export class ValidationPaymentSplipUseCase {
       return { barCode, amount, expirationDate };
     }
 
-    if (lineLenght === 48) {
+    if (lineValidated === LINE_LENGHT_OTHERS) {
       validateDigitsOthers(line);
 
       const barCode = convertLineToBarCodeOthers(line);

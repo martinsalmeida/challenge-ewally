@@ -14,6 +14,7 @@ Projeto desenvolvido utilizando as seguintes tecnologias:
 - Express
 - NodeJS
 - Docker
+- Typescript
 
 ## :clipboard: O Desafio da Aplicação
 
